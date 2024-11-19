@@ -1,0 +1,29 @@
+version: '3.6'
+
+services:
+  verdaccio:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: verdaccio/verdaccio:latest
+    container_name: 'verdaccio'
+    networks:
+      - node-network
+    environment:
+      # - VERDACCIO_PORT=4873
+      # - VERDACCIO_DEFAULT_USER_NAME=admin
+      # - VERDACCIO_DEFAULT_USER_PASSWORD=admin123
+      # - VERDACCIO_DEFAULT_USER_EMAIL=admin@example.com
+        - .env
+    ports:
+      - '${HOST_PORT}:4873'
+    volumes:
+      - './verdaccio/storage:/verdaccio/storage'
+      - './verdaccio/config:/verdaccio/conf'
+      - './verdaccio/plugins:/verdaccio/plugins'
+      - ./scripts:/scripts
+    restart: unless-stopped
+
+networks:
+  node-network:
+    driver: bridge
