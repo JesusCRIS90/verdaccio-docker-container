@@ -10,10 +10,6 @@ services:
     networks:
       - node-network
     environment:
-      # - VERDACCIO_PORT=4873
-      # - VERDACCIO_DEFAULT_USER_NAME=admin
-      # - VERDACCIO_DEFAULT_USER_PASSWORD=admin123
-      # - VERDACCIO_DEFAULT_USER_EMAIL=admin@example.com
         - .env
     ports:
       - '${HOST_PORT}:4873'
