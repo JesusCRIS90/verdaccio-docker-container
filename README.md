@@ -1,4 +1,9 @@
-# TODO: UPDATE THIS FILE
+# TODO: Things to improve on the project
+
+* Fix: Automatization => Create default user
+* Fix: Bash Script: create_default_user.sh does not take .env file correctly
+* Fix: Problem with permission Verdaccio Struct folders. Now, on the creation of the struct folder all them are given any permission using chmod 777, which it is not a good solution... but work for now.
+* Add: Add a section on start_verdaccio.sh script which allow the creation of a custom image of Verdaccio suing the Dockerfile.
 
 # Template project to Verdaccio
 
@@ -6,17 +11,40 @@ Verdaccio is a private NPM Packages Manager. If you are looking for a way to pub
 
 The following project have a base template to configure and stand up a Verdaccio docker container.
 
+
+## QUICK START 
+
+If you only want to make Verdaccio work quickly without dealing with configurations follow these steps:
+
+1. Rename file .env.template to .env
+2. Give executation permission to file: start_verdaccio.sh
+
+```sh
+chmod +x start_verdaccio.sh
+```
+
+3. Execute the bash script: start_verdaccio.sh
+
+```sh
+./start_verdaccio.sh
+```
+
+## Files explain
+
 The next point talk about how to deal with differents files and the meaning of them.
-
-### verdaccio folder
-
-Inside this folder you will have: config, plugins and storage folder. These folder are used by docker as persistent storage volumen to the container. So, each time that you "DOWN" or "UP" the container the information will be there.
-
-Be careful!!! If you changes the names of this folder, you must also change it on the docker-compose.yaml file.
 
 ### .env.template File
 
-You must rename this file to ".env". For now, the unique variable defined is the name of the docker container that you want to see when stand up the service. So, put the name that you want.
+You must rename this file to ".env". We have the following variables:
+
+* COMPOSE_PROJECT_NAME: This will be the name tha you see on your docker container
+* RECREATE_STRUCT_FOLDER: Told to bash script "start_verdaccio.sh" re-create from scracth the verdaccio struct folders. TRUE => Any files/folders under the name verdaccio on your project will be delete
+* HOST_PORT: Port for the application
+* MAX_USERS: Max number of users
+* CREATE_DEFAULT_USER: Told to bash script "start_verdaccio.sh" to create a default user
+* VERDACCIO_DEFAULT_USER_NAME: Default Verdaccio User Name
+* VERDACCIO_DEFAULT_USER_PASSWORD: Default Verdaccio Password
+* VERDACCIO_DEFAULT_USER_EMAIL: Default Verdaccio User Email
 
 ### config.verdaccio.template.yaml File
 
@@ -66,21 +94,29 @@ In this case you must use the command to regenerate the docker image.
 docker-compose up --build -d
 ```
 
-* Generate a Custom User when Docker container is created
-
-In this case you must uncomment the following line of code:
-```yaml
-      - './entrypoint.sh:/entrypoint.sh'
-    entrypoint: ["/entrypoint.sh"]
-```
-
-This told the docker-compose file that execute the bash script file. Be sure that you have this file on the root path.
-
 
 ### Dockerfile
 
 This file is not need it. This file is used to generate a custom version of Verdaccio container where curl is installed. You can use it as base point if you want to create a custom image of Verdaccio with something that default image do not have.
 
-### entrypoint.sh
+### start_verdaccio.sh
 
-This file is used to generate a default user when the container is created. But for now, it seem do not work correctly. So, used under you responsibility.
+This file is used to automatize the whole process to get Verdaccio working on your computer. To be able use it make the following:
+
+1. Make file executable
+
+```sh
+chmod +x start_verdaccio.sh
+```
+2. Execute the file
+
+```sh
+./start_verdaccio.sh
+```
+
+If the whole process work correctly in a few seconds you must have a Verdaccio Docker Container Running on your computer.
+
+
+### Folder scripts
+
+Inside this folder you will find a list of bash script used by the general script: start_verdaccio.sh
