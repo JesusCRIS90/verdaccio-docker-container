@@ -7,6 +7,7 @@ services:
     #   dockerfile: Dockerfile
     image: verdaccio/verdaccio:latest
     container_name: 'verdaccio'
+    user: "10001:10001" # Run as Verdaccio's default UID/GID
     networks:
       - node-network
     environment:
