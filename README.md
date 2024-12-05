@@ -1,16 +1,17 @@
-# TODO: Things to improve on the project
-
-* Fix: Automatization => Create default user
-* Fix: Bash Script: create_default_user.sh does not take .env file correctly
-* Fix: Problem with permission Verdaccio Struct folders. Now, on the creation of the struct folder all them are given any permission using chmod 777, which it is not a good solution... but work for now.
-* Add: Add a section on start_verdaccio.sh script which allow the creation of a custom image of Verdaccio suing the Dockerfile.
-
 # Template project to Verdaccio
 
 Verdaccio is a private NPM Packages Manager. If you are looking for a way to publish your NPM Packges in a private way, verdaccio is a solution.
 
 The following project have a base template to configure and stand up a Verdaccio docker container.
 
+## PRE-REQUIREMENTS
+
+The following requirements are needed before call the scripts:
+
+* Docker must be installed on your computer
+* Docker-compose must be installed on your computer
+* Python must be installed on your computer
+* You must use a Linux Distro
 
 ## QUICK START 
 
@@ -120,3 +121,11 @@ If the whole process work correctly in a few seconds you must have a Verdaccio D
 ### Folder scripts
 
 Inside this folder you will find a list of bash script used by the general script: start_verdaccio.sh
+
+
+# TODO: Things to improve on the project
+
+* Fix: Automatization => Create default user
+* Fix: Bash Script: create_default_user.sh does not take .env file correctly
+* Fix: Problem with permission Verdaccio Struct folders. Now, on the creation of the struct folder all them are given any permission using chmod 777, which it is not a good solution... but work for now.
+* Add: Add a section on start_verdaccio.sh script which allow the creation of a custom image of Verdaccio suing the Dockerfile.
